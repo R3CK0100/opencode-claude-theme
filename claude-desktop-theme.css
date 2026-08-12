@@ -1,9 +1,8 @@
 /* ==========================================================================
-   Claude Desktop Color Replica (Backgrounds & Input Dock Only)
-   No font, text, or typography modifications.
+   Claude Desktop Theme Replica for OpenCode Desktop
    ========================================================================== */
 
-/* 1. Fondo Principal / Lado Derecho (#141415) */
+/* ─── 1. FONDO DE LA APLICACIÓN ─────────────────────────────────────────── */
 html,
 body,
 #root,
@@ -12,9 +11,10 @@ main,
   --v2-background-bg-base: #141415 !important;
   --background-base: #141415 !important;
   background-color: #141415 !important;
+  color: #dedede !important;
 }
 
-/* 2. Fondo del Panel Izquierdo / Sidebar (~#18181a) */
+/* Sidebar lateral izquierdo (#18181a) */
 [data-slot="session-review-v2-sidebar"],
 [data-component="session-review-v2-sidebar-root"],
 aside,
@@ -22,11 +22,32 @@ aside,
   background-color: #18181a !important;
 }
 
-/* 3. Barra de Prompt (#1f1f1f con bordes estilo Claude) */
-[data-dock-surface="shell"] {
+/* ─── 2. FUENTE ANTHROPIC SERIF ────────────────────────────────────────── */
+/* Mantiene la fuente Anthropic Serif Text en todo el contenido de respuesta */
+[data-component="markdown"],
+[data-slot="session-turn-assistant-content"],
+.session-turn-assistant-content,
+[class*="assistantMessage"],
+[class*="markdown"] p,
+[class*="markdown"] li {
+  font-family: "Anthropic Serif Text", "Anthropic Serif Display", Georgia, serif !important;
+}
+
+/* ─── 3. BARRA DE PROMPT (#1f1f1f Y TAMAÑO REDUCIDO CENTRADO) ──────────── */
+/*
+   Aplica el color #1f1f1f, reduce el tamaño a 720px y centra la barra
+   de entrada sin modificar los botones ni selectores internos.
+*/
+[data-dock-surface="shell"],
+[data-component="session-prompt-dock"] {
   background-color: #1f1f1f !important;
-  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08) !important;
+  max-width: 720px !important;
+  width: calc(100% - 32px) !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  margin-bottom: 16px !important;
   border-radius: 16px !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.08) !important;
 }
 
 [data-dock-border-underlay] {
