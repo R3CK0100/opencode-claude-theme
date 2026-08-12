@@ -1,0 +1,294 @@
+/* ==========================================================================
+   Claude Desktop Theme Replica v5 for OpenCode Desktop
+   Selectores exactos obtenidos del DOM real de OpenCode
+   ========================================================================== */
+
+/* ─── 1. VARIABLES BASE — Solo lo que está roto, sin tocar el gradiente ──── */
+/*
+   PROBLEMA DEL DEGRADADO: --surface-raised-stronger-non-alpha es usada por el
+   gradiente del sidebar. En v4 la sobreescribimos al fondo base y apareció.
+   SOLUCIÓN: NO tocar esa variable. Separar los colores.
+*/
+[data-color-scheme="dark"] {
+  color-scheme: dark;
+
+  /* ── Redefinir escala de grises ── */
+  --v2-grey-1100: #141415 !important;   /* bg-base → fondo principal */
+  --v2-grey-1200: #0c0c0d !important;   /* bg-deep */
+  --v2-grey-1000: #1a1a1c !important;   /* bg-layer-01 */
+  --v2-grey-900:  #202022 !important;   /* bg-layer-02 (dock!) */
+  --v2-grey-800:  #282829 !important;   /* bg-layer-03 */
+  --v2-grey-700:  #303033 !important;   /* bg-layer-04 */
+
+  /* ── Texto más brillante (Claude: ~#eaeaec) ── */
+  --v2-grey-100:  #eaeaec !important;   /* text-base */
+  --v2-grey-500:  #8e8e9a !important;   /* text-muted */
+  --v2-grey-600:  #636370 !important;   /* text-faint */
+
+  /* ── Fuente base: tamaño correcto ── */
+  --font-size-base: 16px !important;
+  --font-family-sans: "Anthropic Serif Text", "Anthropic Serif Display", Georgia, Cambria, serif !important;
+
+  /* ── Variables legado ── */
+  --background-base:     #141415 !important;
+  --background-weak:     #1a1a1c !important;
+  --background-strong:   #202022 !important;
+  --background-stronger: #303033 !important;
+
+  background-color: #141415 !important;
+  color: #eaeaec !important;
+}
+
+/* ─── 2. FONDO DE VENTANA ────────────────────────────────────────────────── */
+html,
+body,
+#root {
+  background-color: #141415 !important;
+  color: #eaeaec !important;
+}
+
+/* ─── 3. TIPOGRAFÍA MARKDOWN — Selectores EXACTOS del DOM ───────────────── */
+/*
+   El componente usa: [data-component="markdown"]
+   La fuente base es --font-family-sans y --font-size-base
+   Los headings en OpenCode YA son 600 pero usan --v2-text-text-base (mismo color que body)
+   El truco: usar color más blanco para headings y sem-bold
+*/
+[data-component="markdown"] {
+  font-family: "Anthropic Serif Text", "Anthropic Serif Display", Georgia, Cambria, serif !important;
+  font-size: 16px !important;
+  line-height: 1.68 !important;
+  color: #eaeaec !important;
+  letter-spacing: -0.004em !important;
+}
+
+[data-component="markdown"] p {
+  font-family: "Anthropic Serif Text", "Anthropic Serif Display", Georgia, serif !important;
+  font-size: 16px !important;
+  line-height: 1.68 !important;
+  margin-bottom: 16px !important;
+  color: #eaeaec !important;
+}
+
+/* ─── 4. HEADINGS — Semi-bold con color DIFERENCIADO del body ───────────── */
+/*
+   OpenCode ya tiene font-weight: 600 y las fuentes sans en headings, PERO
+   el color es --v2-text-text-base que es igual al body → no se ve diferencia.
+   FIX: Cambiar color de headings a blanco más puro.
+*/
+[data-component="markdown"] h1 {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+  font-size: 17px !important;
+  font-weight: 600 !important;
+  color: #f5f5f7 !important;
+  margin-top: 32px !important;
+  margin-bottom: 12px !important;
+  line-height: 1.35 !important;
+  letter-spacing: -0.018em !important;
+}
+
+[data-component="markdown"] h2 {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  color: #f0f0f2 !important;
+  margin-top: 28px !important;
+  margin-bottom: 10px !important;
+  line-height: 1.35 !important;
+  letter-spacing: -0.014em !important;
+}
+
+[data-component="markdown"] h3 {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+  font-size: 13.5px !important;
+  font-weight: 600 !important;
+  color: #ebebed !important;
+  margin-top: 22px !important;
+  margin-bottom: 8px !important;
+  line-height: 1.4 !important;
+  letter-spacing: -0.01em !important;
+}
+
+[data-component="markdown"] h4,
+[data-component="markdown"] h5,
+[data-component="markdown"] h6 {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  color: #d8d8da !important;
+  margin-top: 18px !important;
+  margin-bottom: 6px !important;
+}
+
+/* ─── 5. STRONG / BOLD ───────────────────────────────────────────────────── */
+[data-component="markdown"] strong,
+[data-component="markdown"] b {
+  font-weight: 600 !important;
+  color: #f0f0f2 !important;
+}
+
+/* ─── 6. LISTAS — Espaciado entre ítems ─────────────────────────────────── */
+[data-component="markdown"] ul,
+[data-component="markdown"] ol {
+  margin-top: 8px !important;
+  margin-bottom: 16px !important;
+  padding-inline-start: 28px !important;
+}
+
+[data-component="markdown"] li {
+  margin-bottom: 14px !important;   /* Claude: 12-16px entre ítems */
+  font-size: 16px !important;
+  line-height: 1.68 !important;
+  color: #eaeaec !important;
+}
+
+[data-component="markdown"] li::marker {
+  color: #6e6e78 !important;
+}
+
+/* ─── 7. ANCHO DEL CHAT CENTRADO — Selectores exactos ───────────────────── */
+/*
+   Estructura real del DOM:
+   [data-component="session-turn"]
+     └─ [data-slot="session-turn-content"]
+           └─ [data-slot="session-turn-message-container"]
+                 └─ [data-slot="session-turn-message-content"]
+
+   El wrapper que hay que limitar es session-turn-message-container.
+   session-turn-message-content tiene width:100% y max-width:100%.
+*/
+[data-slot="session-turn-message-container"] {
+  max-width: 720px !important;
+  width: 100% !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding-left: 24px !important;
+  padding-right: 24px !important;
+  box-sizing: border-box !important;
+}
+
+/* También los items individuales en la lista de turnos */
+[data-slot="session-turn-list"] {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* ─── 8. DOCK DE INPUT — Selectores exactos ─────────────────────────────── */
+/*
+   PROBLEMA: --surface-raised-stronger-non-alpha la usamos en v4 
+   pero también la usa el gradiente del sidebar header.
+   SOLUCIÓN: Targetear directamente [data-dock-surface="shell"] con background hardcoded
+   y eliminar el box-shadow visible.
+*/
+[data-dock-surface="shell"] {
+  background-color: #202022 !important;
+  /* Quitar el borde gris visible - solo tenue de 0.5px */
+  box-shadow: 0 0 0 0.5px rgba(255, 255, 255, 0.06),
+              0 2px 8px rgba(0, 0, 0, 0.4) !important;
+  border-radius: 16px !important;
+  max-width: 720px !important;
+  width: calc(100% - 48px) !important;
+  margin: 0 auto 14px auto !important;
+}
+
+/* Eliminar el borde underlay que agrega el segundo borde visible */
+[data-dock-border-underlay],
+[data-dock-border-underlay="v2"] {
+  /* Resetear el box-shadow del underlay */
+  --dock-shell-visual-shadow: none !important;
+  --dock-shell-border-underlay-width: 0px !important;
+  box-shadow: none !important;
+}
+
+/* ─── 9. INLINE CODE ─────────────────────────────────────────────────────── */
+[data-component="markdown"] code:not(pre code),
+code:not(pre code) {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+  font-size: 13px !important;
+  background-color: rgba(255, 255, 255, 0.08) !important;
+  color: #d8d8dc !important;
+  padding: 1.5px 6px !important;
+  border-radius: 4px !important;
+  border: 1px solid rgba(255, 255, 255, 0.07) !important;
+  font-weight: 400 !important;
+}
+
+/* ─── 10. OCULTAR SWATCHES DE COLOR ─────────────────────────────────────── */
+[class*="swatch"],
+[class*="color-swatch"],
+[class*="color-circle"],
+[class*="color-preview"],
+[class*="color-dot"],
+[data-color-preview] {
+  display: none !important;
+}
+
+/* ─── 11. BLOQUES DE CÓDIGO ──────────────────────────────────────────────── */
+[data-component="markdown"] .shiki,
+pre {
+  background-color: #1a1a1c !important;
+  border-radius: 10px !important;
+  border: 1px solid rgba(255, 255, 255, 0.07) !important;
+  padding: 14px 16px !important;
+  margin-top: 12px !important;
+  margin-bottom: 18px !important;
+  overflow-x: auto !important;
+}
+
+pre code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+  font-size: 13px !important;
+  line-height: 1.55 !important;
+  color: #d8d8dc !important;
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+}
+
+/* ─── 12. TEXTAREA / INPUT ───────────────────────────────────────────────── */
+textarea {
+  background-color: transparent !important;
+  color: #eaeaec !important;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+  font-size: 15px !important;
+  line-height: 1.5 !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+textarea::placeholder {
+  color: #55555f !important;
+}
+
+[data-component="prompt-input"],
+[data-component="dock-prompt"] {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* ─── 13. HEADER / TITLEBAR ──────────────────────────────────────────────── */
+[data-titlebar-tab-list],
+[data-titlebar-tab] {
+  background-color: #141415 !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04) !important;
+}
+
+/* ─── 14. SCROLLBARS SUTILES ─────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px !important;
+  height: 6px !important;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent !important;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border-radius: 3px !important;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.18) !important;
+}
